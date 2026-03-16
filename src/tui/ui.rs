@@ -231,28 +231,9 @@ fn draw_detail(f: &mut Frame, app: &App, area: Rect) {
             lines.push(Line::from(""));
         }
 
-        // Render body with basic markdown-like styling
-        for line in entry.body.lines() {
-            let line_trimmed = line.trim();
-            if line_trimmed.starts_with("## ") {
-                lines.push(Line::from(Span::styled(
-                    line_trimmed,
-                    Style::default().fg(CYAN).add_modifier(Modifier::BOLD),
-                )));
-            } else if line_trimmed.starts_with("### ") {
-                lines.push(Line::from(Span::styled(
-                    line_trimmed,
-                    Style::default().fg(WHITE).add_modifier(Modifier::BOLD),
-                )));
-            } else if line_trimmed.starts_with("* ") || line_trimmed.starts_with("- ") {
-                lines.push(Line::from(vec![
-                    Span::styled("  • ", Style::default().fg(MUTED)),
-                    Span::raw(&line_trimmed[2..]),
-                ]));
-            } else {
-                lines.push(Line::from(Span::raw(line)));
-            }
-        }
+        // Render body as proper markdown
+        let md_lines = super::markdown::render_markdown(&entry.body);
+        lines.extend(md_lines);
 
         Text::from(lines)
     } else {
