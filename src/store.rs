@@ -79,6 +79,7 @@ impl Store {
         Ok(providers)
     }
 
+    #[allow(dead_code)]
     pub fn is_subscribed(&self, provider: &Provider) -> Result<bool> {
         let count: i64 = self.conn.query_row(
             "SELECT COUNT(*) FROM subscriptions WHERE provider = ?1",

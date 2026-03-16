@@ -13,10 +13,6 @@ const API_CHANGELOG_URL: &str = "https://docs.anthropic.com/en/api/changelog";
 
 #[async_trait]
 impl ProviderAdapter for AnthropicAdapter {
-    fn provider(&self) -> Provider {
-        Provider::Anthropic
-    }
-
     async fn fetch(&self) -> Result<Vec<ChangeEntry>> {
         // Try the API changelog page first
         let entries = fetch_api_changelog().await?;

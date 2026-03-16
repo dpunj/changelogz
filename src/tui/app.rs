@@ -55,7 +55,7 @@ impl App {
             filter_kind: None,
             scroll_offset: 0,
             should_quit: false,
-            status_msg: String::from("q: quit | Tab: switch panel | Enter: toggle sub | 1-5: filter kind | 0: clear filter | r: refresh"),
+            status_msg: String::new(),
         };
         app.apply_filter();
         Ok(app)

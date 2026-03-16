@@ -13,10 +13,6 @@ const CHANGELOG_URL: &str = "https://platform.openai.com/docs/changelog";
 
 #[async_trait]
 impl ProviderAdapter for OpenAIAdapter {
-    fn provider(&self) -> Provider {
-        Provider::OpenAI
-    }
-
     async fn fetch(&self) -> Result<Vec<ChangeEntry>> {
         let entries = fetch_changelog_page().await?;
         if !entries.is_empty() {

@@ -8,7 +8,6 @@ use crate::models::{ChangeEntry, Provider};
 
 #[async_trait]
 pub trait ProviderAdapter: Send + Sync {
-    fn provider(&self) -> Provider;
     async fn fetch(&self) -> Result<Vec<ChangeEntry>>;
 }
 
