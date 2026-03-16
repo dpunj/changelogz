@@ -30,7 +30,7 @@ pub fn print_entries(entries: &[ChangeEntry], format: &OutputFormat) {
         OutputFormat::Human => {
             if entries.is_empty() {
                 println!("{}No entries found.{}", DIM, RESET);
-                println!("{}Subscribe and fetch first: changeloz sub <provider> && changeloz fetch{}", DIM, RESET);
+                println!("{}Subscribe and fetch first: changelogz sub <provider> && changelogz fetch{}", DIM, RESET);
                 return;
             }
             for entry in entries {

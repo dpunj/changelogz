@@ -1,4 +1,4 @@
-# changeloz
+# changelogz
 
 A lazygit-style TUI + CLI for tracking LLM API changelog updates.
 
@@ -14,26 +14,26 @@ cargo install --path .
 
 ```bash
 # Launch the TUI
-changeloz
+changelogz
 
 # Subscribe to providers
-changeloz sub anthropic
-changeloz sub openai
+changelogz sub anthropic
+changelogz sub openai
 
 # Fetch latest changes
-changeloz fetch
+changelogz fetch
 
 # Browse the feed
-changeloz feed
-changeloz feed --kind breaking
-changeloz feed --provider anthropic --json
-changeloz feed --limit 20
+changelogz feed
+changelogz feed --kind breaking
+changelogz feed --provider anthropic --json
+changelogz feed --limit 20
 
 # List providers
-changeloz list
+changelogz list
 
 # Unsubscribe
-changeloz unsub openai
+changelogz unsub openai
 ```
 
 ## TUI Keybindings

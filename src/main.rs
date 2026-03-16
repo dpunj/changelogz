@@ -11,7 +11,7 @@ use output::OutputFormat;
 use store::Store;
 
 #[derive(Parser)]
-#[command(name = "changeloz", about = "Track LLM API changelog updates", version)]
+#[command(name = "changelogz", about = "Track LLM API changelog updates", version)]
 struct Cli {
     #[command(subcommand)]
     command: Option<Commands>,
@@ -115,7 +115,7 @@ async fn main() -> Result<()> {
             let subscribed = store.subscriptions()?;
 
             if subscribed.is_empty() {
-                println!("No subscriptions. Use `changeloz sub <provider>` first.");
+                println!("No subscriptions. Use `changelogz sub <provider>` first.");
                 return Ok(());
             }
 

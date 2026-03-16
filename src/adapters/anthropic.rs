@@ -27,7 +27,7 @@ impl ProviderAdapter for AnthropicAdapter {
 
 async fn fetch_api_changelog() -> Result<Vec<ChangeEntry>> {
     let client = reqwest::Client::builder()
-        .user_agent("changeloz/0.1")
+        .user_agent("changelogz/0.1")
         .build()?;
 
     let resp = client.get(API_CHANGELOG_URL).send().await?;
@@ -104,7 +104,7 @@ async fn fetch_api_changelog() -> Result<Vec<ChangeEntry>> {
 
 async fn fetch_github_releases() -> Result<Vec<ChangeEntry>> {
     let client = reqwest::Client::builder()
-        .user_agent("changeloz/0.1")
+        .user_agent("changelogz/0.1")
         .build()?;
 
     // Fetch from Anthropic Python SDK releases as a proxy for API changes

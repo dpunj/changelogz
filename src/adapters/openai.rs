@@ -26,7 +26,7 @@ impl ProviderAdapter for OpenAIAdapter {
 
 async fn fetch_changelog_page() -> Result<Vec<ChangeEntry>> {
     let client = reqwest::Client::builder()
-        .user_agent("changeloz/0.1")
+        .user_agent("changelogz/0.1")
         .build()?;
 
     let resp = client.get(CHANGELOG_URL).send().await?;
@@ -92,7 +92,7 @@ async fn fetch_changelog_page() -> Result<Vec<ChangeEntry>> {
 
 async fn fetch_github_releases() -> Result<Vec<ChangeEntry>> {
     let client = reqwest::Client::builder()
-        .user_agent("changeloz/0.1")
+        .user_agent("changelogz/0.1")
         .build()?;
 
     let url = "https://api.github.com/repos/openai/openai-python/releases?per_page=30";

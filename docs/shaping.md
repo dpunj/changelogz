@@ -1,4 +1,4 @@
-# changeloz — API Changelog TUI
+# changelogz — API Changelog TUI
 
 ## Frame
 
@@ -46,7 +46,7 @@ Adapters pull from the best available source per provider (GitHub releases atom 
 ## Architecture (high-level)
 
 ```
-changeloz/
+changelogz/
   src/
     main.rs          — CLI entrypoint (clap)
     tui/             — ratatui TUI (lazygit-style)
@@ -58,8 +58,8 @@ changeloz/
 
 ## Interfaces
 
-1. **TUI** (`changeloz` or `changeloz tui`) — interactive browse/filter/subscribe
-2. **CLI** (`changeloz list`, `changeloz sub anthropic`, `changeloz feed --json`) — scriptable
+1. **TUI** (`changelogz` or `changelogz tui`) — interactive browse/filter/subscribe
+2. **CLI** (`changelogz list`, `changelogz sub anthropic`, `changelogz feed --json`) — scriptable
 3. **Future: MCP server** — agents query "what changed in Anthropic this week?"
 
 ## Tech

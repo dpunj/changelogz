@@ -23,8 +23,8 @@ impl Store {
     fn db_path() -> Result<PathBuf> {
         let dir = dirs::data_local_dir()
             .unwrap_or_else(|| PathBuf::from("."))
-            .join("changeloz");
-        Ok(dir.join("changeloz.db"))
+            .join("changelogz");
+        Ok(dir.join("changelogz.db"))
     }
 
     fn migrate(&self) -> Result<()> {

@@ -48,7 +48,7 @@ pub fn draw(f: &mut Frame, app: &App) {
 
 fn draw_header(f: &mut Frame, area: Rect) {
     let header = Paragraph::new(Line::from(vec![
-        Span::styled(" changeloz", Style::default().fg(CYAN).add_modifier(Modifier::BOLD)),
+        Span::styled(" changelogz", Style::default().fg(CYAN).add_modifier(Modifier::BOLD)),
         Span::styled("  LLM API changelog tracker", Style::default().fg(MUTED)),
     ]));
     f.render_widget(header, area);
@@ -131,7 +131,7 @@ fn draw_feed(f: &mut Frame, app: &App, area: Rect) {
             Line::from(Span::styled("  No entries yet", Style::default().fg(DIM))),
             Line::from(""),
             Line::from(Span::styled("  Subscribe to providers and", Style::default().fg(MUTED))),
-            Line::from(Span::styled("  run `changeloz fetch`", Style::default().fg(CYAN))),
+            Line::from(Span::styled("  run `changelogz fetch`", Style::default().fg(CYAN))),
         ]))
         .block(
             Block::default()
