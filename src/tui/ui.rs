@@ -6,7 +6,7 @@ use ratatui::{
     Frame,
 };
 
-use super::app::{App, Panel};
+use super::app::{App, InputMode, Panel};
 use crate::models::ChangeKind;
 
 const CYAN: Color = Color::Rgb(86, 182, 194);
@@ -119,9 +119,11 @@ fn draw_providers(f: &mut Frame, app: &App, area: Rect) {
 fn draw_feed(f: &mut Frame, app: &App, area: Rect) {
     let active = app.active_panel == Panel::Feed;
 
-    let title = match &app.filter_kind {
-        Some(k) => format!(" Feed [{}] ", k),
-        None => " Feed ".to_string(),
+    let title = match (&app.filter_kind, app.search_query.is_empty()) {
+        (Some(k), true) => format!(" Feed [{}] ", k),
+        (Some(k), false) => format!(" Feed [{}] \"{}\" ", k, app.search_query),
+        (None, false) => format!(" Feed \"{}\" ", app.search_query),
+        (None, true) => " Feed ".to_string(),
     };
 
     if app.filtered_entries.is_empty() {
@@ -260,14 +262,26 @@ fn draw_detail(f: &mut Frame, app: &App, area: Rect) {
 }
 
 fn draw_status(f: &mut Frame, app: &App, area: Rect) {
+    // Search mode: show search input
+    if app.input_mode == InputMode::Search {
+        let spans = vec![
+            Span::styled(" /", Style::default().fg(CYAN).add_modifier(Modifier::BOLD)),
+            Span::styled(&app.search_query, Style::default().fg(WHITE)),
+            Span::styled("█", Style::default().fg(CYAN)),
+            Span::styled("  (Enter confirm, Esc cancel)", Style::default().fg(MUTED)),
+        ];
+        f.render_widget(Paragraph::new(Line::from(spans)), area);
+        return;
+    }
+
     let keyhints = vec![
         ("q", "quit"),
         ("Tab", "panel"),
         ("j/k", "nav"),
-        ("Enter", "toggle"),
+        ("/", "search"),
+        ("o", "open"),
+        ("r", "fetch"),
         ("1-5", "filter"),
-        ("0", "clear"),
-        ("r", "refresh"),
     ];
 
     let mut spans: Vec<Span> = vec![Span::styled(" ", Style::default())];
@@ -279,12 +293,11 @@ fn draw_status(f: &mut Frame, app: &App, area: Rect) {
         }
     }
 
-    // Append status message if non-default
-    if !app.status_msg.is_empty() && !app.status_msg.starts_with("q:") {
+    if !app.status_msg.is_empty() {
+        let color = if app.is_fetching { YELLOW } else { CYAN };
         spans.push(Span::styled("  │  ", Style::default().fg(MUTED)));
-        spans.push(Span::styled(&app.status_msg, Style::default().fg(CYAN)));
+        spans.push(Span::styled(&app.status_msg, Style::default().fg(color)));
     }
 
-    let status = Paragraph::new(Line::from(spans));
-    f.render_widget(status, area);
+    f.render_widget(Paragraph::new(Line::from(spans)), area);
 }

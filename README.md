@@ -40,12 +40,16 @@ changelogz unsub openai
 
 | Key | Action |
 |-----|--------|
-| `Tab` | Switch panel (Providers → Feed → Detail) |
+| `Tab` / `Shift+Tab` | Switch panel (Providers ↔ Feed ↔ Detail) |
 | `j/k` or `↑/↓` | Navigate |
+| `g` / `G` | Jump to top / bottom |
 | `Enter` | Toggle subscription (in Providers panel) |
-| `r` | Refresh feed from store |
+| `/` | Search (fuzzy filter across title, body, tags) |
+| `Esc` | Clear search |
+| `o` | Open selected entry URL in browser |
+| `r` | Fetch latest from subscribed providers |
 | `1-5` | Filter by kind (Breaking/Deprecation/Feature/Model/Fix) |
-| `0` | Clear filter |
+| `0` | Clear kind filter |
 | `q` | Quit |
 
 ## Providers (V1)
