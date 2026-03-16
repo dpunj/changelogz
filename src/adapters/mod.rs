@@ -1,4 +1,8 @@
 pub mod anthropic;
+pub mod cohere;
+pub mod github;
+pub mod google;
+pub mod mistral;
 pub mod openai;
 
 use anyhow::Result;
@@ -15,7 +19,8 @@ pub fn adapter_for(provider: &Provider) -> Box<dyn ProviderAdapter> {
     match provider {
         Provider::Anthropic => Box::new(anthropic::AnthropicAdapter),
         Provider::OpenAI => Box::new(openai::OpenAIAdapter),
-        // TODO: implement remaining adapters
-        _ => Box::new(anthropic::AnthropicAdapter), // placeholder
+        Provider::Google => Box::new(google::GoogleAdapter),
+        Provider::Mistral => Box::new(mistral::MistralAdapter),
+        Provider::Cohere => Box::new(cohere::CohereAdapter),
     }
 }

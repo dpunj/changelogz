@@ -6,28 +6,28 @@ use crate::models::{ChangeEntry, Provider};
 use super::github;
 use super::ProviderAdapter;
 
-pub struct OpenAIAdapter;
+pub struct MistralAdapter;
 
 #[async_trait]
-impl ProviderAdapter for OpenAIAdapter {
+impl ProviderAdapter for MistralAdapter {
     async fn fetch(&self) -> Result<Vec<ChangeEntry>> {
         let mut entries = Vec::new();
 
-        // Python SDK
-        match github::fetch_releases("openai", "openai-python", Provider::OpenAI, 30).await {
+        // Mistral Python client
+        match github::fetch_releases("mistralai", "client-python", Provider::Mistral, 30).await {
             Ok(mut e) => entries.append(&mut e),
-            Err(err) => eprintln!("openai python sdk: {}", err),
+            Err(err) => eprintln!("mistral python client: {}", err),
         }
 
-        // Node SDK
-        match github::fetch_releases("openai", "openai-node", Provider::OpenAI, 30).await {
+        // Mistral JS client
+        match github::fetch_releases("mistralai", "client-js", Provider::Mistral, 30).await {
             Ok(mut e) => {
                 for entry in &mut e {
-                    entry.tags.push("node".to_string());
+                    entry.tags.push("javascript".to_string());
                 }
                 entries.append(&mut e);
             }
-            Err(err) => eprintln!("openai node sdk: {}", err),
+            Err(err) => eprintln!("mistral js client: {}", err),
         }
 
         entries.sort_by(|a, b| b.date.cmp(&a.date));
